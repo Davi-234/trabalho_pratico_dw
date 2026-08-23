@@ -1,0 +1,60 @@
+#calculadora_programador {
+    display: grid;
+
+    grid-template-areas:
+        "barra-pesquisa visor_modo input input input input"
+        "barra-pesquisa btn-apagar btn-limpar btn-0 btn-1 btn-a"
+        "barra-pesquisa btn-2 btn-3 btn-4 btn-5 btn-b"
+        "barra-pesquisa btn-6 btn-7 btn-8 btn-9 btn-c"
+        "barra-pesquisa btn-subtract btn-add btn-igual btn-igual btn-d"
+        "barra-pesquisa . . . btn-f btn-e";
+
+    grid-template-columns: 0.09fr repeat(5, 0.7fr);
+    grid-template-rows: 1.5fr repeat(5, 0.9fr);
+}
+
+#calculadora_programador input {
+    border-left: none;
+    overflow: scroll;
+}
+
+.resultado {
+    max-width: 47%;
+    overflow-x: scroll;
+}
+
+.btn-a {
+    grid-area: btn-a;
+}
+
+.btn-b {
+    grid-area: btn-b;
+}
+
+.btn-c {
+    grid-area: btn-c;
+}
+
+.btn-d {
+    grid-area: btn-d;
+}
+
+.btn-e {
+    grid-area: btn-e;
+}
+
+.btn-f {
+    grid-area: btn-f;
+}
+
+.btn-modo1 {
+    grid-area: btn-modo1;
+}
+
+.btn-modo2 {
+    grid-area: btn-modo2;
+}
+
+.btn-modo3 {
+    grid-area: btn-modo3;
+}

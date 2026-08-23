@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Calculadora</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html,
+        body {
+            height: 100%;
+            background-color: rgba(29, 28, 28, 0.774);
+        }
+    </style>
+    <link rel="stylesheet" href="grid_calculadora_progamador.css">
+    <link rel="stylesheet" href="grid_calculadora_padrao.css">
+    <link rel="stylesheet" href="grid_mistos.css">
+    <link rel="stylesheet" href="header.css">
+    <link rel="stylesheet" href="utilidades.css">
+</head>
+
+<body id="calculadora_cientifica">
+
+    <input type="text" id="saidas" disabled readonly>
+
+    <header id="visor_modo" class="compnt_bases_calc">
+        <button class="dec"><span>Dec</span> <span class="resultado"></span></button>
+        <button class="bin"><span>Bin</span> <span class="resultado"></span></button>
+        <button class="oct"><span>Oct</span> <span class="resultado"></span></button>
+        <button class="hex modo_selecionado"><span>Hex</span> <span class="resultado"></span></button>
+    </header>
+
+    <button class="btn-apagar">⌫</button>
+    <button class="btn-limpar" title="Atalho: Esc ou space">CE</button>
+    <button class="btn-potencia operator-btn botao_calculadora">xʸ</button>
+    <button class="btn-sqrt operator-btn botao_calculadora">&radic;X</button>
+
+    <button class="btn-1 numeric-btn">1</button>
+    <button class="btn-2 numeric-btn">2</button>
+    <button class="btn-3 numeric-btn">3</button>
+    <button class="btn-divide operator-btn botao_calculadora">/</button>
+
+    <button class="btn-4 numeric-btn">4</button>
+    <button class="btn-5 numeric-btn">5</button>
+    <button class="btn-6 numeric-btn">6</button>
+    <button class="btn-multiple operator-btn botao_calculadora">x</button>
+
+    <button class="btn-7 numeric-btn">7</button>
+    <button class="btn-8 numeric-btn">8</button>
+    <button class="btn-9 numeric-btn">9</button>
+    <button class="btn-subtract operator-btn">-</button>
+
+    <button class="btn-0 numeric-btn">0</button>
+    <button class="btn-igual">=</button>
+    <button class="btn-add operator-btn">+</button>
+
+    <button class="btn-a compnt_bases_calc btn-numeric-hex btn-10">A</button>
+    <button class="btn-b compnt_bases_calc btn-numeric-hex btn-11">B</button>
+    <button class="btn-c compnt_bases_calc btn-numeric-hex btn-12">C</button>
+    <button class="btn-d compnt_bases_calc btn-13">D</button>
+
+    <button class="btn-subtract compnt_bases_calc">−</button>
+    <button class="btn-e compnt_bases_calc btn-numeric-hex btn-14">E</button>
+    <button class="btn-f compnt_bases_calc btn-numeric-hex btn-15">F</button>
+
+    <section class="barra-pesquisa">
+        <span class="icone menu" title="Menu">
+            <button>
+                <div class="barra"></div>
+                <div class="barra"></div>
+                <div class="barra"></div>
+            </button>
+            <span class="titulo_modo menu" style="visibility: collapse;">Menu</span>
+        </span>
+        <hr>
+        <div class="icone modo_cientifico" title="Calculadora Científca">
+            <button>
+                <svg xmlns="http://w3.org" viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor"
+                    stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" style="color: aliceblue;">
+                    <rect x="5" y="3" width="15" height="19" rx="2" />
+                    <line x1="9" y1="7" x2="16" y2="7" />
+                    <line x1="9" y1="11" x2="8.01" y2="11" />
+                    <line x1="13" y1="11" x2="12.01" y2="11" />
+                    <line x1="17" y1="11" x2="16.01" y2="11" />
+                    <line x1="9" y1="14" x2="8.01" y2="14" />
+                    <line x1="13" y1="14" x2="12.01" y2="14" />
+                    <line x1="17" y1="14" x2="16.01" y2="14" />
+                    <line x1="9" y1="17" x2="8.01" y2="17" />
+                    <line x1="13" y1="17" x2="12.01" y2="17" />
+                    <line x1="17" y1="17" x2="16.01" y2="17" />
+                </svg>
+            </button>
+            <span class="titulo_modo" style="visibility: collapse;">Calculadora Científíca</span>
+        </div>
+        <div class="icone modo_programador"
+            title="Conversor de bases numéricas: decimal, binária, octal e hexadecimal.">
+            <button>
+                <svg xmlns="http://w3.org" viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor"
+                    stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                    <polyline points="16 18 22 12 16 6" />
+                    <polyline points="8 6 2 12 8 18" />
+                    <line x1="14" y1="4" x2="10" y2="20" />
+                </svg>
+            </button>
+            <span class="titulo_modo" style="visibility: collapse;">Calculadora Programador</span>
+        </div>
+    </section>
+    <script src="aparecer_conversao.js"></script>
+    <script src="funcoes_calculadora.js"></script>
+    <script src="butoes_calculadora.js"></script>
+    <script src="atalhos_teclado.js"></script>
+    <script src="icones_funcao.js"></script>
+    <script src="conversao_bases.js"></script>
+    <script src="bases_buttons.js"></script>
+    <script src="aritmetica_bases.js"></script>
+    <script src="../segredo.js"></script>
+</body>
+
+</html>

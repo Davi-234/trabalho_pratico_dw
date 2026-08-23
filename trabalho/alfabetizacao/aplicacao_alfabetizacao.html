@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        html,
+        body {
+            height: 100%;
+            overflow-y: hidden;
+        }
+
+        body {
+            background-color: #AED9E6;
+            color: #0aae1d;
+            font-family: 'Times New Roman', Times, serif;
+        }
+
+        #parte_principal {
+            display: flex;
+            align-items: end;
+            justify-content: center;
+            flex-direction: row;
+        }
+
+        body {
+            display: grid;
+            grid-template-areas: "parte_principal"
+                "teclado";
+            grid-template-columns: 1fr;
+            grid-template-rows: 1fr, 1fr;
+        }
+
+        #teclado {
+            display: grid;
+            grid-template-columns: repeat(13, auto);
+            gap: 5px;
+            margin-top: auto;
+            margin-bottom: 20px;
+        }
+
+        #teclado span {
+            border-radius: 10px;
+            border: 1px black solid;
+            color: black;
+            background-color: transparent;
+            width: 85%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 10%;
+        }
+
+        #box_lettrer {
+            display: block;
+        }
+
+        @media (max-width: 648px) {
+            #teclado {
+                grid-template-columns: repeat(7, auto);
+            }
+        }
+
+        h1 {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="parte_principal">
+        <div id="box_lettrer">
+        </div>
+        <img src="" alt="" id="imagem">
+    </div>
+
+    <div id="teclado">
+        <span>A</span>
+        <span>B</span>
+        <span>C</span>
+        <span>D</span>
+        <span>E</span>
+
+        <span>F</span>
+        <span>G</span>
+        <span>H</span>
+        <span>I</span>
+        <span>J</span>
+
+        <span>K</span>
+        <span>L</span>
+        <span>M</span>
+        <span>N</span>
+        <span>O</span>
+
+        <span>P</span>
+        <span>Q</span>
+        <span>R</span>
+        <span>S</span>
+        <span>T</span>
+
+        <span>U</span>
+        <span>V</span>
+        <span>W</span>
+        <span>X</span>
+        <span>Y</span>
+        <SPan>Z</SPan>
+    </div>
+</body>
+<script>
+    function talk(text) {
+        var sintetizador = new SpeechSynthesisUtterance(text);
+        sintetizador.lang = "pt-BR"; // idioma português
+        sintetizador.rate = 0.9;     // velocidade da fala (1 = normal)
+        sintetizador.pitch = 1;      // tom da voz
+
+        speechSynthesis.cancel();    // interrompe fala anterior, se houver
+        speechSynthesis.speak(sintetizador);
+    }
+</script>
+<script>
+    const box_lettrer = document.getElementById("box_lettrer");
+    window.addEventListener('keydown', function (event) {
+        if (event.key.length <= 1 && islettrer(event.key)) {
+            box_lettrer.innerHTML = "<h1>" + event.key.toUpperCase() + "</h1>";
+            let letra = box_lettrer.innerHTML.replace('<h1>', '').replace('</h1>', '').toLowerCase();
+            talk(letra);
+            document.getElementById("imagem").src = letra + ".png";
+        }
+    });
+</script>
+<script>
+    function islettrer(character) {
+        return (character >= 'a' && character <= 'z') || (character >= 'A' && character <= 'Z');
+    }
+</script>
+<script>
+    const btns = Array.from(document.querySelectorAll("#teclado span"));
+    btns.forEach(btn => {
+        btn.addEventListener('click', function () {
+            box_lettrer.innerHTML = "<h1>" + btn.innerHTML.toUpperCase() + "</h1>";
+            let letra = btn.innerHTML.toLowerCase();
+            talk(letra);
+            document.getElementById("imagem").src = letra + ".png";
+        });
+    });
+</script>
+<script src="../segredo.js"></script>
+</html>

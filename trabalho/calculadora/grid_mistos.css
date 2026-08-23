@@ -1,0 +1,15 @@
+#calculadora_cientifica .botao_calculadora {
+    visibility: visible;
+}
+
+#calculadora_cientifica .compnt_bases_calc {
+    display: none;
+}
+
+#calculadora_programador .botao_calculadora {
+    display: none;
+}
+
+#calculadora_programador .compnt_bases_calc {
+    visibility: visible;
+}

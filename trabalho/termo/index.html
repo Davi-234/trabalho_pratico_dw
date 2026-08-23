@@ -1,0 +1,367 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Termo</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html,
+        body {
+            height: 100%;
+        }
+
+        body {
+            background-color: #6e5c62;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        #tebuleiro {
+            display: grid;
+            grid-template-columns: repeat(1, 1fr);
+            grid-template-rows: repeat(6, 1fr);
+            gap: 10px;
+        }
+
+        .palavra {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            font-size: 1em;
+            gap: 5px;
+            height: auto;
+            width: auto;
+        }
+
+        .leter {
+            aspect-ratio: 1;
+            font-weight: 600;
+            font-family: 'Mitr', sans-serif;
+            color: #FAFAFF;
+            background-color: #615458;
+            border: 0.225em solid #615458;
+            border-radius: 10%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: larger;
+            line-height: 1em;
+            text-transform: uppercase;
+
+            width: 60px;
+            height: 60px;
+            pointer-events: none;
+        }
+
+        .editavel {
+            background-color: transparent;
+            border-color: #4C4347;
+            cursor: pointer;
+            pointer-events: auto;
+        }
+
+        .selecionado {
+            border-bottom-width: 0.465em;
+            border-bottom-style: solid;
+            border-bottom-color: rgb(76, 67, 71);
+        }
+
+        .acerto {
+            background-color: greenyellow;
+            cursor: none;
+            pointer-events: none;
+        }
+
+        .lugar_errado {
+            background-color: yellow;
+            cursor: none;
+            pointer-events: none;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="tebuleiro">
+        <div class="palavra">
+            <div class="leter editavel selecionado"></div>
+            <div class="leter editavel"></div>
+            <div class="leter editavel"></div>
+            <div class="leter editavel"></div>
+            <div class="leter editavel"></div>
+        </div>
+        <div class="palavra">
+            <div class="leter"></div>
+            <div class="leter"></div>
+            <div class="leter"></div>
+            <div class="leter"></div>
+            <div class="leter"></div>
+        </div>
+        <div class="palavra">
+            <div class="leter"></div>
+            <div class="leter"></div>
+            <div class="leter"></div>
+            <div class="leter"></div>
+            <div class="leter"></div>
+        </div>
+        <div class="palavra">
+            <div class="leter"></div>
+            <div class="leter"></div>
+            <div class="leter"></div>
+            <div class="leter"></div>
+            <div class="leter"></div>
+        </div>
+        <div class="palavra">
+            <div class="leter"></div>
+            <div class="leter"></div>
+            <div class="leter"></div>
+            <div class="leter"></div>
+            <div class="leter"></div>
+        </div>
+        <div class="palavra">
+            <div class="leter"></div>
+            <div class="leter"></div>
+            <div class="leter"></div>
+            <div class="leter"></div>
+            <div class="leter"></div>
+        </div>
+    </div>
+</body>
+<script>
+    function permitir_selecao_de_seletor() {
+        document.querySelectorAll('.leter.editavel').forEach(elemento => {
+            elemento.addEventListener('click', function () {
+                document.querySelectorAll('.leter.editavel.selecionado')[0].classList.remove('selecionado');
+
+                this.classList.add('selecionado');
+            });
+        });
+    }
+    permitir_selecao_de_seletor();
+</script>
+<script src="leitor_json.js"></script>
+<script defer>
+    let index_campo_palavras = 0;
+    let palavra = Array.from(document.getElementsByClassName('palavra')[index_campo_palavras].children);
+    let palavra_sort_instancia;
+    window.onload = async () => {
+        palavra_sort_instancia = await carregarPalavras();
+        await carregarLista();
+    };
+    function adicionar_letra(tecla) {
+        // Percorre a'palavra', que um vetor de letras
+        for (let i = 0; i < palavra.length; i++) {
+            // Analisa se o setor atual é o que foi selecionada pelo usuário
+            if (palavra[i].classList.contains('selecionado')) {
+                // Adiciona a letra no setor selecionado
+                palavra[i].innerHTML = tecla;
+                // Se a posição atual for anterior a última posição do vetor
+                if (i < (palavra.length - 1)) {
+                    // Remove o selecionamento do setor no qual fora adicionada uma letra
+                    palavra[i].classList.remove('selecionado');
+                    // Seleciona o setor sequinte ao atual
+                    palavra[i + 1].classList.add('selecionado');
+                }
+                break; // encerra o laço quando o setor selecionado tem a letra adicionado em seu innerHTML
+            }
+        }
+    }
+
+    function backspace() {
+        for (let i = 0; i < palavra.length; i++) {
+            // Analisa se o setor atual é o que foi selecionada pelo usuário
+            if (palavra[i].classList.contains('selecionado')) {
+                // Retira a letra no setor selecionado
+                palavra[i].innerHTML = "";
+                // Se a posição anterior a atual for válida para vetores 
+                if (i - 1 > -1) {
+                    // Remove o selecionamento do setor no qual fora retirada uma letra
+                    palavra[i].classList.remove('selecionado');
+                    // Seleciona o setor anterior ao atual
+                    palavra[i - 1].classList.add('selecionado');
+                }
+                break; // encerra o laço quando o setor selecionado tem a letra retirada de seu innerHTML
+            }
+        }
+    }
+
+    function space() {
+        for (let i = 0; i < palavra.length; i++) {
+            // Analisa se o setor atual é o que foi selecionada pelo usuário
+            if (palavra[i].classList.contains('selecionado')) {
+                // Se a posição atual for anterior a última posição do vetor
+                if (i < (palavra.length - 1)) {
+                    palavra[i].classList.remove('selecionado');
+                    palavra[i + 1].classList.add('selecionado');
+                    /* O setor atualmente selecionado deixa de estar selecionado, e o seguinte é selecionado. */
+                }
+                break;
+            }
+        }
+    }
+
+    function avaliar_palavra() {
+        let palavra_sort = palavra_sort_instancia.normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+
+        for (let i = 0; i < palavra.length; i++) {
+            if (palavra[i].innerHTML === '' || palavra[i].innerHTML === null) {
+                return;
+            }
+        }
+
+        if (!(palavra_existe(palavra.map(letra => letra.innerHTML.toLowerCase()).join("")))) {
+            return;
+        }
+
+        for (let i = 0; i < palavra.length; i++) {
+            palavra[i].classList.remove('editavel');
+
+            if (palavra[i].classList.contains('selecionado')) {
+                palavra[i].classList.remove('selecionado')
+            }
+
+            for (let a = 0; a < palavra_sort.length; a++) {
+                if (a === i || palavra_sort[a] === "*") {
+                    continue;
+                }
+
+                if (palavra[i].innerHTML === palavra_sort[a]) {
+                    palavra[i].classList.add('lugar_errado');
+                    palavra_sort =
+                        palavra_sort.slice(0, a) +
+                        "*" +
+                        palavra_sort.slice(a + 1);
+                    break;
+                }
+            }
+        }
+
+        for (let i = 0; i < palavra.length; i++) {
+            if (palavra[i].innerHTML === palavra_sort[i]) {
+                palavra[i].classList.add('acerto');
+                palavra_sort =
+                    palavra_sort.slice(0, i) +
+                    "*" +
+                    palavra_sort.slice(i + 1);
+            }
+        }
+
+        if (!ganhar(palavra)) proximo_campo_palavra();
+        else console.log('Ganhou');
+    }
+
+    function proximo_campo_palavra() {
+        if (index_campo_palavras > palavra.length) {
+            console.log('Perdeu');
+            return;
+        }
+        index_campo_palavras++;
+        palavra = Array.from(document.getElementsByClassName('palavra')[index_campo_palavras].children);
+
+        for (let i = 0; i < palavra.length; i++) {
+            palavra[i].classList.add('editavel');
+            if (i === 0) palavra[i].classList.add('selecionado');
+        }
+        permitir_selecao_de_seletor();
+    }
+
+    function mostrar_tecla_incorreta(tecla) {
+
+    }
+
+    function ganhar(palavra) {
+        let count = 0;
+
+        for (let i = 0; i < palavra.length; i++) {
+            if (palavra[i].classList.contains('acerto')) {
+                count++;
+            }
+        }
+
+        if (count === 5) {
+            for (let i = 0; i < palavra.length; i++) {
+                palavra[i].innerHTML = palavra_sort_instancia[i];
+            }
+            return true;
+        }
+
+        return false;
+    }
+
+    function seta_esquerda() {
+        for (let i = 0; i < palavra.length; i++) {
+            // Analisa se o setor atual é o que foi selecionada pelo usuário
+            if (palavra[i].classList.contains('selecionado')) {
+                // Se a posição anterior a atual for válida para vetores 
+                if (i - 1 > -1) {
+                    // Remove o selecionamento do setor no qual fora retirada uma letra
+                    palavra[i].classList.remove('selecionado');
+                    // Seleciona o setor anterior ao atual
+                    palavra[i - 1].classList.add('selecionado');
+                } else {
+                    palavra[i].classList.remove('selecionado');
+                    palavra[palavra.length - 1].classList.add('selecionado');
+                }
+                break;
+            }
+        }
+    }
+
+    function seta_direita() {
+        for (let i = 0; i < palavra.length; i++) {
+            // Analisa se o setor atual é o que foi selecionada pelo usuário
+            if (palavra[i].classList.contains('selecionado')) {
+                // Se a posição atual for anterior a última posição do vetor
+                if (i < (palavra.length - 1)) {
+                    palavra[i].classList.remove('selecionado');
+                    palavra[i + 1].classList.add('selecionado');
+                    /* O setor atualmente selecionado deixa de estar selecionado, e o seguinte é selecionado. */
+                } else {
+                    palavra[i].classList.remove('selecionado');
+                    palavra[0].classList.add('selecionado');
+                }
+                break;
+            }
+        }
+    }
+
+</script>
+<script>
+    window.addEventListener('keydown', function (event) {
+        const tecla = event.key.toLowerCase();
+
+        if (tecla >= 'a' && tecla <= 'z' && tecla.length === 1) {
+            adicionar_letra(tecla);
+        }
+
+        // Switch focado nas teclas especiais e comandos
+        switch (event.key) {
+            case 'Enter':
+                avaliar_palavra();
+                break;
+            case ' ': // Espaço vem como um caractere vazio na string
+                space();
+                break;
+            case 'Backspace':
+                backspace();
+                break;
+            case 'ArrowLeft':
+                seta_esquerda();
+                break;
+            case 'ArrowRight':
+                seta_direita();
+                break;
+            default:
+                mostrar_tecla_incorreta();
+                break;
+        }
+    });
+</script>
+
+</html>

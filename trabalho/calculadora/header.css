@@ -1,0 +1,35 @@
+#visor_modo {
+    grid-area: visor_modo;
+    background-color: rgba(30, 25, 25, 0.656);
+    display: flex;
+    justify-content: center;
+    align-items: start;
+    flex-direction: column;
+    gap: 8%;
+    color: aliceblue;
+    padding-left: 7%;
+}
+
+#visor_modo button {
+    border-radius: 20px !important;
+    border-top-left-radius: 0!important;
+    border-bottom-left-radius: 0!important;
+    width: 100%;
+    height: auto;
+    padding: 2%;
+    padding-left: 4%;
+
+    display: flex;
+    display: flex;
+    justify-content: space-between;
+    align-items: start;
+
+    padding-right: 5%;
+
+    background-color: transparent;
+    border: none;
+}
+
+#visor_modo .modo_selecionado {
+    border-left: 3px rgb(129, 152, 186) solid!important;
+}

@@ -1,0 +1,115 @@
+#calculadora_cientifica {
+    display: grid;
+
+    grid-template-areas:
+        "barra-pesquisa input input input input"
+        "barra-pesquisa btn-apagar btn-limpar btn-potencia btn-sqrt"
+        "barra-pesquisa btn-1 btn-2 btn-3 btn-divide"
+        "barra-pesquisa btn-4 btn-5 btn-6 btn-multiple"
+        "barra-pesquisa btn-7 btn-8 btn-9 btn-subtract"
+        "barra-pesquisa btn-igual btn-igual btn-0 btn-add";
+
+    grid-template-columns: 0.09fr repeat(4, 0.8fr);
+    grid-template-rows: 1.5fr repeat(5, 0.8fr);
+}
+
+button {
+    background-color: rgb(30, 25, 25);
+    color: whitesmoke;
+    border-radius: 20px;
+    border: 1px rgba(5, 59, 141, 0.645) solid;
+}
+
+input {
+    grid-area: input;
+    font-size: 6em;
+    border: 1px rgba(4, 50, 117, 0.645) solid;
+    background-color: rgba(30, 25, 25, 0.656);
+}
+
+.btn-apagar {
+    grid-area: btn-apagar;
+}
+
+.btn-limpar {
+    grid-area: btn-limpar;
+}
+
+.btn-potencia {
+    grid-area: btn-potencia;
+}
+
+.btn-sqrt {
+    grid-area: btn-sqrt;
+}
+
+.btn-1 {
+    grid-area: btn-1;
+}
+
+.btn-2 {
+    grid-area: btn-2;
+}
+
+.btn-3 {
+    grid-area: btn-3;
+}
+
+.btn-4 {
+    grid-area: btn-4;
+}
+
+.btn-5 {
+    grid-area: btn-5;
+}
+
+.btn-6 {
+    grid-area: btn-6;
+}
+
+.btn-7 {
+    grid-area: btn-7;
+}
+
+.btn-8 {
+    grid-area: btn-8;
+}
+
+.btn-9 {
+    grid-area: btn-9;
+}
+
+.btn-0 {
+    grid-area: btn-0;
+}
+
+.btn-divide {
+    grid-area: btn-divide;
+}
+
+.btn-multiple {
+    grid-area: btn-multiple;
+}
+
+.btn-subtract {
+    grid-area: btn-subtract;
+}
+
+.btn-add {
+    grid-area: btn-add;
+}
+
+.btn-igual {
+    grid-area: btn-igual;
+}
+
+.barra-pesquisa {
+    grid-area: barra-pesquisa;
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+    justify-content: start;
+    gap: 0.5em;
+    background-color: rgb(37, 35, 35);
+
+}

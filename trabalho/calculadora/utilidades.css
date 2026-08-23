@@ -1,0 +1,61 @@
+.icone {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: start;
+    gap: 0.2em;
+    height: 3em;
+    width: 100%;
+}
+
+.barra {
+    background-color: black;
+    height: 0.4em;
+    width: 2.1em;
+}
+
+.icone button {
+    background-color: transparent;
+    border-radius: 50%;
+    border: none;
+    width: 3.1em;
+    height: 3.1em;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 0.2em;
+}
+
+button:hover {
+    background-color: rgba(99, 98, 98, 0.363);
+    transition: background-color 0.3s ease, transform 0.1s ease;
+}
+
+button:active {
+    background-color: rgba(158, 157, 157, 0.363);
+    transform: scale(0.98);
+    transition: background-color 0.3s ease, transform 0.1s ease;
+}
+
+.icone:active {
+    background-color: rgba(158, 157, 157, 0.363);
+    transform: scale(0.98);
+    transition: background-color 0.3s ease, transform 0.1s ease;
+}
+
+hr {
+    width: 100%;
+    border-color: black;
+}
+
+.titulo_modo {
+    color: aliceblue;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+button[disabled] {
+    background-color: rgba(30, 25, 25, 0.396);
+}
