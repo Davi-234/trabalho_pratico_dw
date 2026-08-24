@@ -131,6 +131,9 @@
             let letra = box_lettrer.innerHTML.replace('<h1>', '').replace('</h1>', '').toLowerCase();
             talk(letra);
             document.getElementById("imagem").src = letra + ".png";
+            if (letra === 'r') {
+                document.getElementById("imagem").src = letra + ".jpg";
+            }
         }
     });
 </script>
