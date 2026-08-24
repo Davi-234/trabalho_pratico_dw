@@ -1,5 +1,5 @@
 # Descrição:
-Este repositório é um trabalho para a disciplina de DW (Desenvolvimento Web) 1, que possui o objetivo de desenvolver as habilidades aprendidas durante as aulas, sobretudo, acerca de: layouts responsivos, armazenamento local (LocalStroage) e manipulação do DOM.
+Este repositório é um trabalho para a disciplina de DW (Desenvolvimento Web) 1 do IFMG Campus Formiga, que possui o objetivo de desenvolver as habilidades aprendidas durante as aulas, sobretudo, acerca de: layouts responsivos, armazenamento local (LocalStroage) e manipulação do DOM.
 
 ## Foram pedidos três aplicações diferentes:
 
