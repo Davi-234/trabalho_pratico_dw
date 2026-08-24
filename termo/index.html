@@ -363,5 +363,17 @@
         }
     });
 </script>
+<script>
+    function talk(text) {
+        var sintetizador = new SpeechSynthesisUtterance(text);
+        sintetizador.lang = "pt-BR"; // idioma português
+        sintetizador.rate = 0.9;     // velocidade da fala (1 = normal)
+        sintetizador.pitch = 1;      // tom da voz
 
+        speechSynthesis.cancel();    // interrompe fala anterior, se houver
+        speechSynthesis.speak(sintetizador);
+    }
+    alert('Surpresa!!');
+    talk('Parabéns, achou outro easter egg!!.');
+</script>
 </html>
