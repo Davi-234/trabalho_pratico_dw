@@ -151,6 +151,10 @@
             let letra = btn.innerHTML.toLowerCase();
             talk(letra);
             document.getElementById("imagem").src = letra + ".png";
+            if (letra === 'r') {
+                document.getElementById("imagem").src = letra + ".jpg";
+                talk("Achou um EasterEGG!! Parabéns.");
+            }
         });
     });
 </script>
